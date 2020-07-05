@@ -7,6 +7,8 @@ export class User {
     lng: number;
   };
 
+  markerContent = (): string => `User name is ${this.name}`;
+
   constructor() {
     this.name = faker.name.firstName();
     this.location = {

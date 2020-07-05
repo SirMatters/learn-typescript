@@ -1,12 +1,13 @@
 import { User } from './User';
 import { Company } from './Company';
 
-interface Mappable {
+export interface Mappable {
   location: {
     lat: number;
     lng: number;
   };
   markerContent(): string;
+  color: string;
 }
 /**
  * The class is used to wrap google map to prevent

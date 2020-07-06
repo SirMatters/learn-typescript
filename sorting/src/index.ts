@@ -1,9 +1,15 @@
 import { Sorter } from './Sorter';
 import { NumbersCollection } from './NumbersCollection';
 import { CharactersCollection } from './CharactersCollection';
+import { LinkedList } from './LinkedList';
 
-let num = new NumbersCollection([1, 3, -5, 6, 0]);
-let str = new CharactersCollection('ngashaaau');
-let sorter = new Sorter(str);
+let ll = new LinkedList();
+ll.add(10);
+ll.add(-1);
+ll.add(3);
+ll.add(2);
+ll.add(6);
+
+let sorter = new Sorter(ll);
 sorter.sort();
-console.log(str.data);
+ll.print();

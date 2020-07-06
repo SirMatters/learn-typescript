@@ -10,6 +10,5 @@ ll.add(3);
 ll.add(2);
 ll.add(6);
 
-let sorter = new Sorter(ll);
-sorter.sort();
+ll.sort();
 ll.print();

@@ -1,11 +1,15 @@
-import { Sortable } from './Sorter';
+import { Sorter } from './Sorter';
 
 class Node {
   next: Node | null = null;
   constructor(public data: number) {}
 }
 
-export class LinkedList implements Sortable {
+export class LinkedList extends Sorter {
+  constructor() {
+    super();
+  }
+
   head: Node | null = null;
   add(data: number): void {
     const node = new Node(data);

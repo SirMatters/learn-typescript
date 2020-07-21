@@ -8,4 +8,6 @@ var Summary_1 = require("./Summary");
 var reader = new MatchReader_1.MatchReader(new CsvFileReader_1.CsvFileReader('football.csv'));
 reader.read();
 var summary = new Summary_1.Summary(new WinsAnalysis_1.WinsAnalysis('Man United'), new ConsoleReport_1.ConsoleReport());
+var summary1 = Summary_1.Summary.winsAnalysisToConsole('Man United');
+summary.buildAndPrintReport(reader.matches);
 summary.buildAndPrintReport(reader.matches);

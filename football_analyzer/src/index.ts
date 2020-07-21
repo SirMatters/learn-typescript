@@ -8,5 +8,7 @@ let reader = new MatchReader(new CsvFileReader('football.csv'));
 reader.read();
 
 let summary = new Summary(new WinsAnalysis('Man United'), new ConsoleReport());
+let summary1 = Summary.winsAnalysisToConsole('Man United');
 
+summary.buildAndPrintReport(reader.matches);
 summary.buildAndPrintReport(reader.matches);

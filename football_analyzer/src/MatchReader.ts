@@ -15,8 +15,8 @@ export type MatchData = [
   Date,
   string,
   string,
-  string,
-  string,
+  number,
+  number,
   MatchResult,
   string
 ];
@@ -32,8 +32,8 @@ export class MatchReader {
         dateStringToDate(r[0]),
         r[1],
         r[2],
-        r[3],
-        r[4],
+        parseInt(r[3]) || 0,
+        parseInt(r[4]) || 0,
         r[5] as MatchResult,
         r[6],
       ]

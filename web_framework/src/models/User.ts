@@ -42,8 +42,13 @@ export class User {
       });
   }
   save(): void {
-    axios.post(`http://localhost:3000/users/${this.get('id')}`, {
-      ...this.data,
-    });
+    if (this.get('id')) {
+      axios.post(`http://localhost:3000/users/${this.get('id')}`, {
+        ...this.data,
+      });
+    } else {
+        axios.post(`http://localhost:3000/users`, {
+          ...this.data,
+        });
   }
 }

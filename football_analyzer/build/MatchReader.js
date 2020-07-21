@@ -18,8 +18,8 @@ var MatchReader = /** @class */ (function () {
             utils_1.dateStringToDate(r[0]),
             r[1],
             r[2],
-            r[3],
-            r[4],
+            parseInt(r[3]) || 0,
+            parseInt(r[4]) || 0,
             r[5],
             r[6],
         ]; });

@@ -7,11 +7,12 @@ var WinsAnalysis = /** @class */ (function () {
     }
     WinsAnalysis.prototype.run = function (data) {
         var totalWins = 0;
-        for (var m in data) {
-            if (m[2] === this.team && m[5] === MatchReader_1.MatchResult.homeWin) {
+        for (var _i = 0, data_1 = data; _i < data_1.length; _i++) {
+            var m = data_1[_i];
+            if (m[1] === this.team && m[5] === MatchReader_1.MatchResult.homeWin) {
                 totalWins++;
             }
-            else if (m[3] === this.team && m[5] === MatchReader_1.MatchResult.awayWin) {
+            else if (m[2] === this.team && m[5] === MatchReader_1.MatchResult.awayWin) {
                 totalWins++;
             }
         }

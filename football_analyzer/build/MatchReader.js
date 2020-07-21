@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var utils_1 = require("./utils");
+var CsvFileReader_1 = require("./CsvFileReader");
 var MatchResult;
 (function (MatchResult) {
     MatchResult["homeWin"] = "H";
@@ -12,6 +13,9 @@ var MatchReader = /** @class */ (function () {
         this.reader = reader;
         this.matches = [];
     }
+    MatchReader.fromCsv = function (filename) {
+        return new MatchReader(new CsvFileReader_1.CsvFileReader(filename));
+    };
     MatchReader.prototype.read = function () {
         this.reader.read();
         this.matches = this.reader.data.map(function (r) { return [

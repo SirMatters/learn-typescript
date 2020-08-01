@@ -2145,33 +2145,85 @@ var User = /*#__PURE__*/function (_Model_1$Model) {
 }(Model_1.Model);
 
 exports.User = User;
-},{"./Eventing":"src/models/Eventing.ts","./Sync":"src/models/Sync.ts","./Attributes":"src/models/Attributes.ts","./Model":"src/models/Model.ts"}],"src/index.ts":[function(require,module,exports) {
+},{"./Eventing":"src/models/Eventing.ts","./Sync":"src/models/Sync.ts","./Attributes":"src/models/Attributes.ts","./Model":"src/models/Model.ts"}],"src/models/Collection.ts":[function(require,module,exports) {
+"use strict";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Collection = void 0;
+
+var User_1 = require("./User");
+
+var Eventing_1 = require("./Eventing");
+
+var axios_1 = __importDefault(require("axios"));
+
+var Collection = /*#__PURE__*/function () {
+  function Collection(rootUrl) {
+    _classCallCheck(this, Collection);
+
+    this.rootUrl = rootUrl;
+    this.models = [];
+    this.events = new Eventing_1.Eventing();
+  }
+
+  _createClass(Collection, [{
+    key: "fetch",
+    value: function fetch() {
+      var _this = this;
+
+      axios_1.default.get(this.rootUrl).then(function (_ref) {
+        var data = _ref.data;
+        data.forEach(function (user) {
+          _this.models.push(User_1.User.buildUser(user));
+        });
+
+        _this.trigger('fetch');
+      });
+    }
+  }, {
+    key: "on",
+    get: function get() {
+      return this.events.on;
+    }
+  }, {
+    key: "trigger",
+    get: function get() {
+      return this.events.trigger;
+    }
+  }]);
+
+  return Collection;
+}();
+
+exports.Collection = Collection;
+},{"./User":"src/models/User.ts","./Eventing":"src/models/Eventing.ts","axios":"node_modules/axios/index.js"}],"src/index.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var User_1 = require("./models/User");
+var Collection_1 = require("./models/Collection");
 
-var user = User_1.User.buildUser({
-  id: 2
-});
-user.on('change', function () {
-  console.log('The user data was changed');
-});
-user.on('save', function () {
-  console.log('The user data was saved to DB');
-});
-user.fetch();
-setTimeout(function () {
-  user.set({
-    name: 'ChangedTest2'
-  });
-  user.save();
-}, 1000);
-console.log(user);
-},{"./models/User":"src/models/User.ts"}],"../../../../../AppData/Roaming/nvm/v14.4.0/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+var rootUrl = 'http://localhost:3000/users';
+var userCollection = new Collection_1.Collection(rootUrl);
+userCollection.fetch();
+console.log(userCollection.models);
+},{"./models/Collection":"src/models/Collection.ts"}],"../../../../../AppData/Roaming/nvm/v14.4.0/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -2199,7 +2251,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55110" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57168" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

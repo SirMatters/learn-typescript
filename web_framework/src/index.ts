@@ -1,6 +1,5 @@
-import { Collection } from './models/Collection';
+import { User } from './models/User';
 
-const rootUrl = 'http://localhost:3000/users';
-const userCollection = new Collection(rootUrl);
+const userCollection = User.buildUsersCollection();
 userCollection.fetch();
 console.log(userCollection.models);
